@@ -20,7 +20,7 @@ class FolioreaderPlugin: FlutterPlugin, MethodCallHandler {
   private var reader: Reader? = null
   private var config: ReaderConfig? = null
 
-  private var activity: Activity? = null
+//  private var activity: Activity? = null
   private var context: Context? = null
   var messenger: BinaryMessenger? = null
 
@@ -38,26 +38,29 @@ class FolioreaderPlugin: FlutterPlugin, MethodCallHandler {
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-    if (call.method == "config") {
-      val themeColor = call.argument<String>("themeColor")
-      val identifier = call.argument<String>("identifier")
-      val scrollDirection = call.argument<String>("scrollDirection")
-      Log.d("config","themeColor:$themeColor")
-      config = ReaderConfig(context,identifier,themeColor,scrollDirection)
-//      result.success("Android ${android.os.Build.VERSION.RELEASE}")
-    } else if (call.method == "open") {
-
-      val bookPath = call.argument<String>("bookPath") as String
-      val lastLocation = call.argument<String>("lastLocation")
-      Log.d("open","bookPath:$bookPath")
-      reader = Reader(context = context!!,messenger = messenger!!,config = config!!)
-      reader!!.open(bookPath = bookPath,lastLocation = lastLocation)
-    } else {
-      result.notImplemented()
+    when (call.method){
+      "config" -> {
+        val themeColor = call.argument<String>("themeColor")
+        val identifier = call.argument<String>("identifier")
+        val scrollDirection = call.argument<String>("scrollDirection")
+        val showTts = call.argument<Boolean>("showTts")
+        val showRemainingIndicator = call.argument<Boolean>("showRemainingIndicator")
+        Log.d("config","themeColor:$themeColor")
+        config = ReaderConfig(context,identifier,themeColor,scrollDirection,showTts,showRemainingIndicator)}
+      "open" -> {
+        val bookPath = call.argument<String>("bookPath") as String
+        val lastLocation = call.argument<String>("lastLocation")
+        Log.d("open","bookPath:$bookPath")
+        reader = Reader(context = context!!,messenger = messenger!!,config = config!!)
+        reader!!.open(bookPath = bookPath,lastLocation = lastLocation)
+      } else -> {
+        result.notImplemented()
+      }
     }
   }
 
   override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
     channel.setMethodCallHandler(null)
+    reader?.close()
   }
 }

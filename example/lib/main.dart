@@ -1,8 +1,5 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:folioreader/folioreader.dart';
 
 void main() {
@@ -37,7 +34,10 @@ class _MyAppState extends State<MyApp> {
           onPressed: () async {
             final result = await FilePicker.platform.pickFiles();
             if (result != null) {
-              Folioreader.config();
+              Folioreader.config(
+                  themeColor: '#ffff0000',
+                  scrollDirection: ScrollDirection.vertical,
+                  showRemainingIndicator: true);
               Folioreader.open(result.paths[0]);
             }
           },

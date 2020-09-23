@@ -7,13 +7,23 @@ class Folioreader {
 
   static Future config({
     String themeColor = '#ff234567',
-    String scrollDirection = 'vertical',
+    ScrollDirection scrollDirection = ScrollDirection.vertical,
+    bool showTts = false,
+    bool showRemainingIndicator = false,
   }) async {
-    await _channel.invokeMethod('config',{'themeColor':themeColor,'scrollDirection':scrollDirection});
+    String directionStr = scrollDirection.toString();
+    await _channel.invokeMethod('config', {
+      'themeColor': themeColor,
+      'scrollDirection': directionStr.substring(directionStr.indexOf('.') + 1),
+      'showTts': showTts,
+      'showRemainingIndicator': showRemainingIndicator,
+    });
   }
 
-  static Future open(String bookPath, {String location}) async {
+  static Future open(String bookPath, {String lastLocation}) async {
     await _channel
-        .invokeMethod('open', {'bookPath': bookPath, 'location': location});
+        .invokeMethod('open', {'bookPath': bookPath, 'location': lastLocation});
   }
 }
+
+enum ScrollDirection { vertical, horizontal }
