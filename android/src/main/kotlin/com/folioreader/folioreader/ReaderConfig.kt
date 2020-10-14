@@ -7,7 +7,7 @@ import com.folioreader.Config
 
 class ReaderConfig(context: Context?, identifier: String?, themeColor: String? = "#ff234567",
                    scrollDirection: String? = "vertical",
-                   showTts: Boolean? = false,showRemainingIndicator: Boolean? = false) {
+                   showTts: Boolean? = false,showRemainingIndicator: Boolean? = false,allowedSystemUI:Boolean?=false) {
 //    private val identifier: String? = null
 //    private val themeColor: String? = null
 //    private val scrollDirection: String? = null
@@ -30,6 +30,7 @@ class ReaderConfig(context: Context?, identifier: String?, themeColor: String? =
         config.setNightThemeColorInt(Color.parseColor(themeColor))
         config.isShowRemainingIndicator = showRemainingIndicator as Boolean
         config.isShowTts = showTts as Boolean
+        config.setAllowedSystemUI(allowedSystemUI as Boolean)
         Log.d("Config", "config:${config.toString()} ")
     }
 }
