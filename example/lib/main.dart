@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
             if (result != null) {
               Folioreader.config(
                   themeColor: '#ffff0000',
-                  scrollDirection: ScrollDirection.vertical,
+                  scrollDirection: ScrollDirection.horizontal,
                   showRemainingIndicator: true);
               Folioreader.open(result.paths[0]);
             }
