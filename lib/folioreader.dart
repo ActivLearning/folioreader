@@ -16,8 +16,7 @@ class Folioreader {
       'themeColor': themeColor,
       'scrollDirection': directionStr.substring(directionStr.indexOf('.') + 1),
       'showTts': showTts,
-      'showRemainingIndicator': showRemainingIndicator,
-      'allowedSystemUI': allowedSystemUI
+      'showRemainingIndicator': showRemainingIndicator
     });
   }
 
