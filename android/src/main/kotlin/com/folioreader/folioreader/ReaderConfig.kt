@@ -30,7 +30,6 @@ class ReaderConfig(context: Context?, identifier: String?, themeColor: String? =
         config.setNightThemeColorInt(Color.parseColor(themeColor))
         config.isShowRemainingIndicator = showRemainingIndicator as Boolean
         config.isShowTts = showTts as Boolean
-        config.setAllowedSystemUI(allowedSystemUI as Boolean)
         Log.d("Config", "config:${config.toString()} ")
     }
 }

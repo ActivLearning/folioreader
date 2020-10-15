@@ -45,9 +45,8 @@ class FolioreaderPlugin: FlutterPlugin, MethodCallHandler {
         val scrollDirection = call.argument<String>("scrollDirection")
         val showTts = call.argument<Boolean>("showTts")
         val showRemainingIndicator = call.argument<Boolean>("showRemainingIndicator")
-        val allowedSystemUI = call.argument<Boolean>("allowedSystemUI")
         Log.d("config","themeColor:$themeColor")
-        config = ReaderConfig(context,identifier,themeColor,scrollDirection,showTts,showRemainingIndicator,allowedSystemUI)}
+        config = ReaderConfig(context,identifier,themeColor,scrollDirection,showTts,showRemainingIndicator)}
       "open" -> {
         val bookPath = call.argument<String>("bookPath") as String
         val lastLocation = call.argument<String>("lastLocation")
