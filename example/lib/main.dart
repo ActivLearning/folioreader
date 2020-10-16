@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
             final result = await FilePicker.platform.pickFiles();
             if (result != null) {
               Folioreader.config(
-                  themeColor: '#ffff0000',
+                  themeColor: Colors.red,
                   scrollDirection: ScrollDirection.horizontal,
                   showRemainingIndicator: true);
               Folioreader.open(result.paths[0]);

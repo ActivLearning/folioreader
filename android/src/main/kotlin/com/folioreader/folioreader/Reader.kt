@@ -26,6 +26,22 @@ class Reader internal constructor(private val context: Context, messenger: Binar
     var result: MethodChannel.Result? = null
     private var pageEventSink: EventSink? = null
     private val messenger: BinaryMessenger? = null
+
+    companion object {
+        private const val PAGE_CHANNEL = "page"
+    }
+
+    init {
+        readerConfig = config
+        // highlightsAndSave
+        folioReader = FolioReader.get()
+                .setOnHighlightListener(this)
+                .setReadLocatorListener(this)
+                .setOnClosedListener(this)
+        setPageHandler(messenger)
+    }
+
+
     fun open(bookPath: String, lastLocation: String?) {
         Thread(Runnable {
             try {
@@ -115,17 +131,5 @@ class Reader internal constructor(private val context: Context, messenger: Binar
         }
     }
 
-    companion object {
-        private const val PAGE_CHANNEL = "page"
-    }
 
-    init {
-        readerConfig = config
-        // highlightsAndSave
-        folioReader = FolioReader.get()
-                .setOnHighlightListener(this)
-                .setReadLocatorListener(this)
-                .setOnClosedListener(this)
-        setPageHandler(messenger)
-    }
 }

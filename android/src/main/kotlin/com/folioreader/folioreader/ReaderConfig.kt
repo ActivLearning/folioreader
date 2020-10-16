@@ -28,7 +28,7 @@ class ReaderConfig(context: Context?, identifier: String?, themeColor: String? =
 
         config.setThemeColorInt(Color.parseColor(themeColor))
         config.setNightThemeColorInt(Color.parseColor(themeColor))
-        config.isShowRemainingIndicator = showRemainingIndicator as Boolean
+        config.isShowRemainingIndicator = true//showRemainingIndicator as Boolean
         config.isShowTts = showTts as Boolean
         Log.d("Config", "config:${config.toString()} ")
     }
